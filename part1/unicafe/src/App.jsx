@@ -42,22 +42,29 @@ const Statistics = ({good, neutral, bad}) => {
             <table>
                 <tbody>
                 <tr>
-                    <td><StatisticsLine text={"good"} value={good}></StatisticsLine></td>
+                    <td><StatisticsLine text={"good"}></StatisticsLine></td>
+                    <td><StatisticsLine value={good}></StatisticsLine></td>
                 </tr>
                 <tr>
-                    <td><StatisticsLine text={"neutral"} value={neutral}></StatisticsLine></td>
+                    <td><StatisticsLine text={"neutral"}></StatisticsLine></td>
+                    <td><StatisticsLine value={neutral}></StatisticsLine></td>
                 </tr>
                 <tr>
-                    <td><StatisticsLine text={"bad"} value={bad}></StatisticsLine></td>
+                    <td><StatisticsLine text={"bad"} ></StatisticsLine></td>
+                    <td><StatisticsLine value={bad}></StatisticsLine></td>
                 </tr>
                 <tr>
-                    <td><StatisticsLine text={"all"} value={total}></StatisticsLine></td>
+                    <td><StatisticsLine text={"all"}></StatisticsLine></td>
+                    <td><StatisticsLine  value={total}></StatisticsLine></td>
                 </tr>
                 <tr>
-                    <td><StatisticsLine text={"average"} value={average}></StatisticsLine></td>
+                    <td><StatisticsLine text={"average"} ></StatisticsLine></td>
+                    <td><StatisticsLine value={average}></StatisticsLine></td>
                 </tr>
                 <tr>
-                    <td><StatisticsLine text={"positive"} value={positivePercent}></StatisticsLine></td>
+                    <td><StatisticsLine text={`positive`}></StatisticsLine></td>
+                    <td><StatisticsLine  value={positivePercent}></StatisticsLine></td>
+                    <td><p>%</p></td>
                 </tr>
                 </tbody>
             </table>
@@ -66,7 +73,9 @@ const Statistics = ({good, neutral, bad}) => {
 
 }
 
-const StatisticsLine = ({text, value}) => <p>{text} {value} </p>
+const StatisticsLine = ({text, value}) => <p>{text} {value}</p>
+
+
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
