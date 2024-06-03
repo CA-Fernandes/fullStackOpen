@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
 const App = () => {
     const anecdotes = [
@@ -30,12 +30,22 @@ const App = () => {
         setSelectedVote(newVoted);
     }
 
+    const mostVotedAnecdote = () => {
+        const highestValue = Math.max(...selectedVote);
+        return selectedVote.indexOf(highestValue);
+    }
+
     return (
         <div>
+            <h1>Anecdote of the day</h1>
             <p>{anecdotes[selected]}</p>
             <p>has {selectedVote[selected]} votes</p>
             <Button onClick={changeAnecdote} text={"next anecdote"}></Button>
             <Button onClick={incrementVote} text={"vote"}></Button>
+            <h1>Anecdote with most votes</h1>
+            <p>{anecdotes[mostVotedAnecdote()]}</p>
+            <p>has {selectedVote[mostVotedAnecdote()]} votes</p>
+
         </div>
     )
 }
