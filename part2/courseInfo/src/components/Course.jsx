@@ -1,21 +1,20 @@
-const Header = ({ course }) => <h1 key={course.id}>{course.name}</h1>
+const Header = ({course}) => <h2 key={course.id}>{course.name}</h2>
 
-const Total = ({ sum }) => <p>Number of exercises {sum}</p>
+const Total = ({sum}) => <h4>Total of {sum} exercises</h4>
 
-const Part = ({ part }) =>
+const Part = ({part}) =>
     <p key={part.id}>
         {part.name} {part.exercises}
     </p>
 
-const Content = ({ parts }) =>{
-
-
-    return(
+const Content = ({parts}) => {
+    return (
         <>
             {parts.map(partOfCourse =>
                 <Part key={partOfCourse.id} part={partOfCourse}></Part>
             )}
-        </>)}
+        </>)
+}
 
 const Course = ({course}) => {
     const sumOfExercises = course.parts.reduce((sum, coursePart) => {
@@ -31,3 +30,5 @@ const Course = ({course}) => {
 
     )
 }
+
+export default Course
