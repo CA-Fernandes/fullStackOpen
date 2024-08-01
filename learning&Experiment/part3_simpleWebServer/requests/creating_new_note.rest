@@ -1,7 +1,0 @@
-POST localhost:3001/api/notes
-Content-Type: application/json
-
-{
-  "content": "WebStorm rest client is a pre-requisite",
-  "important": true
-}
