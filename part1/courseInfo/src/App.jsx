@@ -1,22 +1,28 @@
 import {render} from "react-dom";
 
 const App = () => {
-    const course = 'Half Stack application development'
-    const part1 = 'Fundamentals of React'
-    const exercises1 = 10
-    const part2 = 'Using props to pass data'
-    const exercises2 = 7
-    const part3 = 'State of a component'
-    const exercises3 = 14
-
+    const course = {
+        name: 'Half Stack application development',
+        parts: [
+            {
+                name: 'Fundamentals of React',
+                exercises: 10
+            },
+            {
+                name: 'Using props to pass data',
+                exercises: 7
+            },
+            {
+                name: 'State of a component',
+                exercises: 14
+            }
+        ]
+    }
     return (
         <div>
-            <Header course={course}/>
-            <Content part1={part1} exercise1={exercises1}
-                     part2={part2} exercise2={exercises2}
-                     part3={part3} exercise3={exercises3}
-            />
-            <Total exercise1={exercises1} exercise2={exercises2} exercise3={exercises3}></Total>
+            <Header course={course.name} />
+            <Content parts={course.parts} />
+            <Total parts={course.parts} />
         </div>
     )
 }
@@ -37,11 +43,11 @@ const Content = (props) => {
     return(
     <>
         {/* eslint-disable-next-line react/prop-types */}
-        <Parts part={props.part1} exercise={props.exercise1}/>
+        <Parts parts={props.parts[0]}/>
         {/* eslint-disable-next-line react/prop-types */}
-        <Parts part={props.part2} exercise={props.exercise2}/>
+        <Parts parts={props.parts[1]}/>
         {/* eslint-disable-next-line react/prop-types */}
-        <Parts part={props.part3} exercise={props.exercise3}/>
+        <Parts parts={props.parts[2]}/>
     </>
     )
 }
@@ -51,7 +57,7 @@ const Total = (props) => {
     return(
         <>
             {/* eslint-disable-next-line react/prop-types */}
-        <p>number of exercsies {props.exercise1 + props.exercise2 + props.exercise3}</p>
+        <p>number of exercsies {props.parts[0].exercises}</p>
         </>
     )
 }
@@ -61,7 +67,7 @@ const Parts = (props) => {
     return(
         <>
             {/* eslint-disable-next-line react/prop-types */}
-        <p>{props.part} {props.exercise}</p>
+        <p>{props.parts.name} {props.parts.exercises}</p>
         </>
     )
 }
