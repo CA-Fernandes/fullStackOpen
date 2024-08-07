@@ -25,6 +25,9 @@ let notes = [
     }
 ]
 
+
+
+
 app.get("/", (request, response) => {
     response.send("<h1>This is my phonebook application please use /api/person to get the array</h1>");
     }
@@ -32,6 +35,14 @@ app.get("/", (request, response) => {
 
 app.get("/api/persons", (req, res) => {
     res.send(notes);
+})
+
+app.get("/info", (req,res) => {
+    let date = new Date();
+
+    res.send(`<p>Phonebook has info for ${notes.length}</p>
+<p>${date}</p>`);
+
 })
 
 const PORT = 3001;
