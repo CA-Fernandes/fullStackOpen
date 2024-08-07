@@ -1,5 +1,5 @@
 const express = require("express");
-const {response} = require("express");
+const {response, request} = require("express");
 const app = express();
 
 let notes = [
@@ -35,6 +35,17 @@ app.get("/", (request, response) => {
 
 app.get("/api/persons", (req, res) => {
     res.send(notes);
+})
+
+app.get("/api/persons/:id", (req,res) => {
+    const id = req.params.id;
+    const note = notes.find(note => note.id === id);
+
+    if (note) {
+        res.json(note);
+    } else {
+        res.status(404).send("No such note, error 404")
+    }
 })
 
 app.get("/info", (req,res) => {
