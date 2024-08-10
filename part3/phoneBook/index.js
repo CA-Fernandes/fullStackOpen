@@ -31,6 +31,15 @@ const generateID = () => {
     return String(Math.round(Math.random() * 99999999));
 }
 
+const nameCheck = (name) => {
+    if (notes.find(note => note.name === name)) {
+        return true;
+    }
+
+    return false;
+}
+
+const print = () => console.log("experiment");
 
 
 
@@ -74,7 +83,11 @@ app.post("/api/persons", (req, res) => {
     const note = req.body;
 
     if (!note.name || !note.number) {
-        return res.status(400).json({error: "No such name or number"});
+        return res.status(400).json({error: "No name or number added"});
+    }
+
+    if (nameCheck(note.name)) {
+        return res.status(400).json({error: "name is already in use"})
     }
 
     const newNote = {

@@ -1,0 +1,6 @@
+POST localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "This is a fake name"
+}
