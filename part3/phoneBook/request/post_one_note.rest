@@ -1,0 +1,8 @@
+## Post request to add new notes
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "fsagadsf",
+  "number": "234254432"
+}

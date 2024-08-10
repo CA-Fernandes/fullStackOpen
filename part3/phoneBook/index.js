@@ -2,6 +2,8 @@ const express = require("express");
 const {response, request} = require("express");
 const app = express();
 
+app.use(express.json());
+
 let notes = [
     {
         "id": "1",
@@ -24,6 +26,10 @@ let notes = [
         "number": "39-23-6423122"
     }
 ]
+
+const generateID = () => {
+    return String(Math.round(Math.random() * 99999999));
+}
 
 
 
@@ -63,6 +69,28 @@ app.delete("/api/persons/:id", (req,res) => {
 
     res.status(204).end();
 })
+
+app.post("/api/persons", (req, res) => {
+    const note = req.body;
+
+    if (!note.name || !note.number) {
+        return res.status(400).json({error: "No such name or number"});
+    }
+
+    const newNote = {
+        id: generateID(),
+        name: note.name,
+        number: note.number
+    }
+
+    notes = notes.concat(newNote);
+
+    res.json(note);
+})
+
+
+
+
 
 const PORT = 3001;
 app.listen(PORT, () =>
