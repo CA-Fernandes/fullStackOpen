@@ -1,7 +1,9 @@
 const express = require("express");
+const morgan = require("morgan");
 const {response, request} = require("express");
 const app = express();
 
+app.use(morgan("tiny"));
 app.use(express.json());
 
 let notes = [
