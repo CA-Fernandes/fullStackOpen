@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 
 const Header = ({heading}) => (
   <div>
@@ -10,7 +10,7 @@ const Button = (props) => (
   <button onClick={props.onClick}>{props.text}</button>
 )
 
-const Stat = ({text, statistic}) => (
+const StatisticLine = ({text, statistic}) => (
   <div>{text} {statistic}</div>
 )
 
@@ -20,12 +20,12 @@ const Statistics = (props) => {
   }
   return( 
   <div>
-    <Stat text="good" statistic={props.goodStat}/>
-    <Stat text="neutral" statistic={props.neutralStat}/>
-    <Stat text="bad" statistic={props.badStat}/>
-    <Stat text="all" statistic={props.total}/>
-    <Stat text="average" statistic={props.average}/>
-    <Stat text="positive" statistic={props.positivePercentage}/>
+    <StatisticLine text="good" statistic={props.goodStatisticLine}/>
+    <StatisticLine text="neutral" statistic={props.neutralStatisticLine}/>
+    <StatisticLine text="bad" statistic={props.badStatisticLine}/>
+    <StatisticLine text="all" statistic={props.total}/>
+    <StatisticLine text="average" statistic={props.average}/>
+    <StatisticLine text="positive" statistic={props.positivePercentage}/>
   </div>
   )
 }
@@ -36,9 +36,9 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const incrementOnClick = (state, setButtonState) => {
+  const incrementOnClick = (state, setButtonStatisticLinee) => {
     console.log("prior state: ", state);
-    setButtonState(state + 1)
+    setButtonStatisticLinee(state + 1)
     console.log("state after update: ", state)
   }
 
@@ -56,7 +56,7 @@ const App = () => {
       <Button onClick = {() => incrementOnClick(neutral, setNeutral)} text="Neutral"></Button>
       <Button onClick = {() => incrementOnClick(bad, setBad)} text="Bad"></Button>
       <Header heading = "statistics"/>
-      <Statistics goodStat = {good} neutralStat = {neutral} badStat = {bad} total = {total} average = {average} positivePercentage = {`${positivePercentage} %`}/>
+      <Statistics goodStatisticLine = {good} neutralStatisticLine = {neutral} badStatisticLine = {bad} total = {total} average = {average} positivePercentage = {`${positivePercentage} %`}/>
     </div>
   )
 }
