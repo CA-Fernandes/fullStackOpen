@@ -14,7 +14,11 @@ const Stat = ({text, statistic}) => (
   <div>{text} {statistic}</div>
 )
 
-const Statistics = (props) => (
+const Statistics = (props) => {
+  if (props.total === 0) {
+    return (<div>No feedback given</div>)
+  }
+  return( 
   <div>
     <Stat text="good" statistic={props.goodStat}/>
     <Stat text="neutral" statistic={props.neutralStat}/>
@@ -23,8 +27,8 @@ const Statistics = (props) => (
     <Stat text="average" statistic={props.average}/>
     <Stat text="positive" statistic={props.positivePercentage}/>
   </div>
-  
-)
+  )
+}
 
 
 const App = () => {
@@ -43,7 +47,7 @@ const App = () => {
   ? 0 
   : (good - bad) / total;
 
-  const positivePercentage = good / total
+  const positivePercentage = (good / total) * 100
 
   return(
     <div>
@@ -52,7 +56,7 @@ const App = () => {
       <Button onClick = {() => incrementOnClick(neutral, setNeutral)} text="Neutral"></Button>
       <Button onClick = {() => incrementOnClick(bad, setBad)} text="Bad"></Button>
       <Header heading = "statistics"/>
-      <Statistics goodStat = {good} neutralStat = {neutral} badStat = {neutral} total = {total} average = {average} positivePercentage = {`${positivePercentage} %`}/>
+      <Statistics goodStat = {good} neutralStat = {neutral} badStat = {bad} total = {total} average = {average} positivePercentage = {`${positivePercentage} %`}/>
     </div>
   )
 }
