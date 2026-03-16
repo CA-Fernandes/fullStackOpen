@@ -1,4 +1,5 @@
 import Part from "./Part";
+import Total from "./Total";
 
 const Content = ({ parts }) => {
 	return (
@@ -8,6 +9,7 @@ const Content = ({ parts }) => {
 					something
 				</Part>
 			))}
+			<Total parts={parts}></Total>
 		</div>
 	);
 };
