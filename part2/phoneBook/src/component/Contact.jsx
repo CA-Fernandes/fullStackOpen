@@ -1,5 +1,5 @@
-const Contact = ({name}) => {
-    return(<div>{name}</div>)
+const Contact = ({name, number}) => {
+    return(<div>{name} {number}</div>)
 }
 
 export default Contact
