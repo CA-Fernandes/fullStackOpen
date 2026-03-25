@@ -1,19 +1,12 @@
 import { useState } from "react"
 
-const SearchContacts = () => {
-    const [searchedName, setSearchedName] = useState('')
-
-    const handleSearch = (event) => {
-        setSearchedName(event.target.value);
-        console.log(setSearchedName);
-        
-    }
+const SearchContacts = ({value, onChange}) => {
 
     return (
         <div>
             filter shown with <input
-            value={searchedName}
-            onChange={handleSearch}
+            value={value}
+            onChange={onChange}
             >
             </input>
         </div>

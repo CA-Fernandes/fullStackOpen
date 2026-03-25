@@ -11,6 +11,8 @@ const App = () => {
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
 
+  const [filter, setFilter] = useState('')
+
   const addContact = (contactObject) => {
     if(contactExists(contactObject)) {
       return;
@@ -29,14 +31,19 @@ const App = () => {
     return false;
   }
 
+  const personsToShow = persons.filter(person =>
+    person.name.toLowerCase().includes(filter.toLowerCase())
+  )
+
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <SearchContacts></SearchContacts>
+      <SearchContacts value={filter} onChange={(event) => setFilter(event.target.value)}></SearchContacts>
       <ContactEntry onAddContact={addContact}></ContactEntry>
       <h2>Numbers</h2>
       <div>
-        {persons.map((person) => <Contact key={person.name} name={person.name} number={person.number}></Contact>)}
+        {personsToShow.map((person) => <Contact key={person.name} name={person.name} number={person.number}></Contact>)}
       </div>
     </div>
   )
