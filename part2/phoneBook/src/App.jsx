@@ -1,62 +1,39 @@
 import { useState } from 'react'
 import Contact from './component/Contact'
+import ContactEntry from './component/ContactEntry'
+import SearchContacts from './component/SearchContacts'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '040-1234567'
-    }
-  ]) 
-  const [newName, setNewName] = useState('');
-  const [newNumber, setNewNumber] = useState('');
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
 
-  const addPerson = (event) => {
-    event.preventDefault();
-    const hasName = persons.some((contact) => contact.name ===  newName);
+  const addContact = (contactObject) => {
+    if(contactExists(contactObject)) {
+      return;
+    }
+    setPersons(persons.concat(contactObject))
+  }
+
+  const contactExists = (contactObject) => {
+    const hasName = persons.some((contact) => contact.name ===  contactObject.name);
 
     if (hasName) {
-      alert(`${newName} is already added to phonebook`)
-      return
-    }
-    
-
-    const personObject = {
-      name: newName,
-      number: newNumber
+      alert(`${contactObject.name} is already added to phonebook`)
+      return true;
     }
 
-    setPersons(persons.concat(personObject));
-    setNewName('');
-    setNewNumber('');
+    return false;
   }
-
-  const handleNameChange = (event) => {
-    setNewName(event.target.value);
-  }
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value);
-  }
-  
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input 
-          value={newName}
-          onChange={handleNameChange}
-          />
-        </div>
-        <div>number: <input
-          value={newNumber}
-          onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <SearchContacts></SearchContacts>
+      <ContactEntry onAddContact={addContact}></ContactEntry>
       <h2>Numbers</h2>
       <div>
         {persons.map((person) => <Contact key={person.name} name={person.name} number={person.number}></Contact>)}
