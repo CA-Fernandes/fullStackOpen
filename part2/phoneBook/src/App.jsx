@@ -9,11 +9,9 @@ const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    console.log("effect started");
     axios
     .get('http://localhost:3001/persons')
     .then(response => {
-      console.log('promise fulfilled');
       setPersons(response.data)
     })
   }, [])
@@ -24,7 +22,14 @@ const App = () => {
     if(contactExists(contactObject)) {
       return;
     }
-    setPersons(persons.concat(contactObject))
+
+    axios
+    .post('http://localhost:3001/persons', contactObject)
+    .then(response => {
+      setPersons(persons.concat(response.data))
+      console.log(response.data);
+      
+    })
   }
 
   const contactExists = (contactObject) => {
