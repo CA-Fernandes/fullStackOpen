@@ -3,10 +3,12 @@ import Contact from './component/Contact'
 import ContactEntry from './component/ContactEntry'
 import SearchContacts from './component/SearchContacts'
 import { useEffect } from 'react'
+import Notification from './component/Notification'
 import personService from './services/person'
 
 const App = () => {
   const [persons, setPersons] = useState([])
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService
@@ -28,6 +30,10 @@ const App = () => {
     .create(contactObject)
     .then(recievedPerson => {
       setPersons(persons.concat(recievedPerson))
+      setNotification(`Added ${recievedPerson.name}`)
+      setTimeout(() => {
+          setNotification(null)
+        }, 5000)
     })
   }
 
@@ -39,6 +45,10 @@ const App = () => {
       .update(contact.id, contactObject)
       .then(recievedPerson => {
         setPersons(persons.map(person => person.id === contact.id ? recievedPerson : person))
+        setNotification(`Updated ${recievedPerson.name}'s number`)
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000)
       })
     }
     return
@@ -71,6 +81,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}></Notification>
       <SearchContacts value={filter} onChange={(event) => setFilter(event.target.value)}></SearchContacts>
       <ContactEntry onAddContact={addContact}></ContactEntry>
       <h2>Numbers</h2>

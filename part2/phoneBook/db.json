@@ -4,6 +4,21 @@
       "name": "john",
       "number": "789",
       "id": "5_y3jiXdX1A"
+    },
+    {
+      "name": "john smith",
+      "number": "123454567",
+      "id": "JAgn_8kD5yk"
+    },
+    {
+      "name": "bonnie",
+      "number": "12453426",
+      "id": "z_XTEOtK1CY"
+    },
+    {
+      "name": "bun12",
+      "number": "142135",
+      "id": "x9r5bqmh5jM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
