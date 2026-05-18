@@ -33,7 +33,16 @@ app.get("/", (request, response) => {
 app.get("/api/persons", (req, res) => {
     res.send(notes);
 })
+app.get('/api/persons/:id', (req, res) => {
+    const id = req.params.id
+    const note = notes.find(note => note.id === id)
 
+    if (note) {
+        res.json(note)
+    } else (
+        res.status(404).end()
+    )
+})
 app.get("/api/info", (req, res) => {
     const currentTime = new Date()
     res.send(`<p>Phonebook has info for ${notes.length} people<p>
