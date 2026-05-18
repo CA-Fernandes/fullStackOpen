@@ -1,5 +1,5 @@
 const express = require("express");
-const {response} = require("express");
+const { response } = require("express");
 const app = express();
 
 let notes = [
@@ -27,11 +27,18 @@ let notes = [
 
 app.get("/", (request, response) => {
     response.send("<h1>This is my phonebook application please use /api/person to get the array</h1>");
-    }
+}
 )
 
 app.get("/api/persons", (req, res) => {
     res.send(notes);
+})
+
+app.get("/api/info", (req, res) => {
+    const currentTime = new Date()
+    res.send(`<p>Phonebook has info for ${notes.length} people<p>
+        <p>${currentTime}<p>`)
+
 })
 
 const PORT = 3001;
