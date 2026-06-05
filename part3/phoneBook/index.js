@@ -1,6 +1,7 @@
 const express = require("express");
 const { response } = require("express");
 const app = express();
+app.use(express.json())
 
 let persons = [
     {
@@ -56,6 +57,34 @@ app.delete("/api/persons/:id", (req, res) => {
 
     res.status(204).end()
 })
+
+/* TODO: Write a post request to generate a new person in the database.
+- Send a post request to a api/persons
+- Formatting a json string in such a way to send it to api/persons
+- Ensuring this person has a unique ID, using math.random
+*/
+
+app.post("/api/persons", (req, res) => {
+    const id = Math.floor(Math.random() * 10000 + 5)
+
+    if (!req.body) {
+        return response.status(404).json({
+            error: 'content missing'
+        })
+    }
+
+    const person = {
+        id: `${id}`,
+        name: req.body.name,
+        number: req.body.number
+    }
+
+    persons = persons.concat(person)
+
+    res.json(person)
+
+})
+
 
 const PORT = 3001;
 app.listen(PORT, () =>
