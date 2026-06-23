@@ -58,20 +58,37 @@ app.delete("/api/persons/:id", (req, res) => {
     res.status(204).end()
 })
 
-/* TODO: Write a post request to generate a new person in the database.
-- Send a post request to a api/persons
-- Formatting a json string in such a way to send it to api/persons
-- Ensuring this person has a unique ID, using math.random
+/*TODO: Implement Error handling
+1) Validate the data
+    a) validate single entry
+    1) Check if req body contains name
+    2) Check if req body contains number
+    3) Unique errors for each
+
+    b) Ensure no duplicates
+    1) If name is in the phone book, do not allow entry
+    2) respond with the same error code
 */
 
 app.post("/api/persons", (req, res) => {
     const id = Math.floor(Math.random() * 10000 + 5)
 
     if (!req.body) {
-        return response.status(404).json({
+        return res.status(400).json({
             error: 'content missing'
         })
     }
+
+    if (!req.body.name) {
+        return res.status(400).json({
+            error: 'name is missing'
+        })
+    } else if (!req.body.number) {
+        return res.status(400).json({
+            error: 'number is missing'
+        })
+    }
+
 
     const person = {
         id: `${id}`,
@@ -80,9 +97,7 @@ app.post("/api/persons", (req, res) => {
     }
 
     persons = persons.concat(person)
-
     res.json(person)
-
 })
 
 
