@@ -1,7 +1,9 @@
 const express = require("express");
 const { response } = require("express");
+const morgan = require("morgan");
 const app = express();
 app.use(express.json())
+app.use(morgan('tiny'))
 
 let persons = [
     {
@@ -57,18 +59,6 @@ app.delete("/api/persons/:id", (req, res) => {
 
     res.status(204).end()
 })
-
-/*TODO: Implement Error handling
-1) Validate the data
-    a) validate single entry
-    1) Check if req body contains name
-    2) Check if req body contains number
-    3) Unique errors for each
-
-    b) Ensure no duplicates
-    1) If name is in the phone book, do not allow entry
-    2) respond with the same error code
-*/
 
 app.post("/api/persons", (req, res) => {
     const id = Math.floor(Math.random() * 10000 + 5)
