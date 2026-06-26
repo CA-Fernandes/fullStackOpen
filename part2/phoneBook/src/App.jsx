@@ -25,18 +25,15 @@ const App = () => {
     const [notification, setNotificationMessage] = useState('')
 
     useEffect(() => {
-        console.log('request sent')
         formService
             .getAll()
             .then(initialPersons => {
                 setPersons(initialPersons)
             })
-        console.log('service received')
     }, []);
 
     const addPerson = (event) => {
         event.preventDefault();
-        console.log("Button Clicked", event.target);
         const person = {name: newName, number: newNumber}
 
         const isFound = persons.find(personInArray => personInArray.name === person.name);
@@ -50,7 +47,6 @@ const App = () => {
         formService
             .create(person)
             .then(returnedPerson => {
-                console.log('person object inserted in database');
                 setPersons(persons.concat(returnedPerson));
                 setNewName('');
                 setNewNumber('');
@@ -69,9 +65,7 @@ const App = () => {
         if (window.confirm(`Delete ${person.name} ?`)) {
             formService
                 .deletePerson(id)
-                .then(returnedPersonList => {
-                        console.log('deletion completed');
-                        console.log(returnedPersonList);
+                .then(returnedPersonList => { 
                         setPersons(arrayWithoutPerson);
                     }
                 )
